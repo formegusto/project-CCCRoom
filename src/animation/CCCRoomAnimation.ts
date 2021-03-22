@@ -4,7 +4,7 @@ const LPDrop = keyframes`
     from {
         transform: translateZ(50rem);
     } to {
-        transform: translateZ(0);
+        transform: translateZ(0rem);
     } 
 `;
 const LPRotate = keyframes`

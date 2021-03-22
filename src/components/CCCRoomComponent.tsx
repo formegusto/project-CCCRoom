@@ -33,7 +33,29 @@ function CCCRoomComponent(props: Props) {
                     </LPBack>
                 </LP>
                 <LPBoxBlock>
-                    <LPBoxFront/>
+                    <LPBoxFront>
+                        <LPStick>
+                            <LPStickBottom>
+                                <LPStickTop/>
+                                <LPStickLeft>
+                                    <LPStickBody>
+                                        <LPStickRound>
+                                            <RoundTop/>
+                                            <RoundLeft/>
+                                            <RoundRight />
+                                        </LPStickRound>
+                                    </LPStickBody>
+                                </LPStickLeft>
+                                <LPStickRight />
+                            </LPStickBottom>
+                        </LPStick>
+                        {/* <LPPin>
+                            <LPPinTop/>
+                            <LPPinBottom />
+                            <LPPinLeft />
+                            <LPPinRight />
+                        </LPPin> */}
+                    </LPBoxFront>
                     <LPBoxBack/>
                     <LPBoxLeft/>
                     <LPBoxRight/>
@@ -44,6 +66,201 @@ function CCCRoomComponent(props: Props) {
         </CCCRoom>
     )
 }
+
+const LPStickBody = styled.div`
+    position: relative;
+
+    width: 50%;
+    height: 50%;
+
+    background-color: #CCC;
+
+    transform-style: preserve-3d;
+`;
+
+const LPStickRound = styled.div`
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 50%;
+    height: 50%;
+
+    z-index: 10;
+
+    background-color: rgb(0,0,0);
+    transform-style: preserve-3d;
+    
+    & > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+`;
+
+const RoundTop = styled.div`
+    width: 5px;
+    height: 5px;
+
+    background-color: red;
+    transform: translateZ(-20px);
+
+    border-end-start-radius: 100%;
+`;
+const RoundLeft = styled.div`
+    width: 5px;
+    height: 20px;
+    background-color: green;
+
+    transform: rotateX(-90deg) rotateY(90deg);
+    transform-origin: 100% 0%;
+`;
+const RoundRight = styled.div`
+    width: 5px;    
+    height: 20px;
+    background-color: blue;
+
+    transform: rotateX(-90deg);
+    transform-origin: 0% 0%;
+`;
+
+const LPStickBottom = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 20px;
+    height: 50px;
+
+    transform-style: preserve-3d;
+
+    & > div {
+        background-color: rgb(255,255,255);
+        box-sizing: border-box;
+    }
+`;
+
+const LPStickTop = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 1px solid rgb(0,0,0);
+
+    transform: translateZ(20px);  
+    transform-style: preserve-3d;
+`;
+
+const LPStickLeft = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    width: 100%;
+    height: 20px;
+
+    border: 1px solid rgb(0,0,0);
+    transform-style: preserve-3d;
+
+    transform: rotateX(90deg);
+    transform-origin: 50% 0%;
+`;
+
+const LPStickRight = styled.div`
+    width: 100%;
+    height: 100%;
+
+    border: 1px solid rgb(0,0,0);
+
+    transform: rotateY(90deg);
+    transform-origin: 100% 50%;
+`;
+
+const LPStick = styled.div`
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+
+    width: 20px;
+    height: 200px;
+
+    box-sizing: border-box;
+    border: 1px solid rgb(0,0,0);
+`;
+
+const LPPin = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -10px 0 0 -10px;
+
+    width: 10px;
+    height: 10px;
+
+    transform-style: preserve-3d;
+`;
+
+const LPPinTop = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgb(0,0,0);
+
+    transform: translateZ(9px);
+    border-start-start-radius: 100%;
+`;
+
+const LPPinBottom = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 100%;
+
+    background-color: rgb(0,0,0);
+`;
+
+const LPPinLeft = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transform: rotateX(-90deg);
+    transform-origin: 50% 100%;
+
+    background-color: rgb(0,0,0);
+`;
+
+const LPPinRight = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transform: rotateY(90deg);
+    transform-origin: 100% 50%;
+
+    background-color: rgb(0,0,0);
+`;
 
 const CCCAudio = styled.audio`
 `;
@@ -60,7 +277,7 @@ const CCCRoom = styled.div`
 `;
 
 const LPBox = styled.div`
-    width: 400px;
+    width: 500px;
     height: 400px;
 
     transform: translateY(-10rem) rotateX(70deg) rotateZ(45deg);
@@ -157,6 +374,8 @@ const LPBoxFront = styled.div`
     border: 2px solid rgb(0,0,0);
     border-radius: 1rem;
     background-color: rgb(255,255,255);
+
+    transform-style: preserve-3d;
 `;
 
 const LPBoxBack = styled.div`
@@ -193,8 +412,8 @@ const LP = styled.div<{styleProps: LPProps}>`
 
     ${props => props.styleProps.animation && 
         props.styleProps.animation === LPDrop ?
-            css`animation: ${props.styleProps.animation} 1s` :
-            css`animation: ${props.styleProps.animation} 1s linear infinite`  
+            css`animation: ${props.styleProps.animation} 1s forwards;` :
+            css`animation: ${props.styleProps.animation} 1s linear infinite;`  
     }
 `;
 
@@ -241,9 +460,10 @@ const LPHole = styled.div`
     width: 10px;
     height: 10px;
 
+    box-sizing: border-box;
     border: 2px solid rgb(0,0,0);
     border-radius: 100%;
-    background-color: transparent;
+    background-color: rgb(0,0,0);
 `;
 
 export default CCCRoomComponent;
