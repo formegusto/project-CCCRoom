@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/babochoi/static/css/main.e1eab72e.chunk.css",
-    "main.js": "/babochoi/static/js/main.2b453154.chunk.js",
-    "main.js.map": "/babochoi/static/js/main.2b453154.chunk.js.map",
-    "runtime-main.js": "/babochoi/static/js/runtime-main.1d5eefc2.js",
-    "runtime-main.js.map": "/babochoi/static/js/runtime-main.1d5eefc2.js.map",
-    "static/js/2.9463236d.chunk.js": "/babochoi/static/js/2.9463236d.chunk.js",
-    "static/js/2.9463236d.chunk.js.map": "/babochoi/static/js/2.9463236d.chunk.js.map",
-    "static/js/3.e3b15d43.chunk.js": "/babochoi/static/js/3.e3b15d43.chunk.js",
-    "static/js/3.e3b15d43.chunk.js.map": "/babochoi/static/js/3.e3b15d43.chunk.js.map",
-    "index.html": "/babochoi/index.html",
-    "static/css/main.e1eab72e.chunk.css.map": "/babochoi/static/css/main.e1eab72e.chunk.css.map",
-    "static/js/2.9463236d.chunk.js.LICENSE.txt": "/babochoi/static/js/2.9463236d.chunk.js.LICENSE.txt",
-    "static/media/paul_sleepingBeauty.3f59e038.mp3": "/babochoi/static/media/paul_sleepingBeauty.3f59e038.mp3"
+    "main.css": "/project-cccroom/static/css/main.e1eab72e.chunk.css",
+    "main.js": "/project-cccroom/static/js/main.2b453154.chunk.js",
+    "main.js.map": "/project-cccroom/static/js/main.2b453154.chunk.js.map",
+    "runtime-main.js": "/project-cccroom/static/js/runtime-main.b232eabf.js",
+    "runtime-main.js.map": "/project-cccroom/static/js/runtime-main.b232eabf.js.map",
+    "static/js/2.7cf6210b.chunk.js": "/project-cccroom/static/js/2.7cf6210b.chunk.js",
+    "static/js/2.7cf6210b.chunk.js.map": "/project-cccroom/static/js/2.7cf6210b.chunk.js.map",
+    "static/js/3.e3b15d43.chunk.js": "/project-cccroom/static/js/3.e3b15d43.chunk.js",
+    "static/js/3.e3b15d43.chunk.js.map": "/project-cccroom/static/js/3.e3b15d43.chunk.js.map",
+    "index.html": "/project-cccroom/index.html",
+    "static/css/main.e1eab72e.chunk.css.map": "/project-cccroom/static/css/main.e1eab72e.chunk.css.map",
+    "static/js/2.7cf6210b.chunk.js.LICENSE.txt": "/project-cccroom/static/js/2.7cf6210b.chunk.js.LICENSE.txt",
+    "static/media/paul_sleepingBeauty.3f59e038.mp3": "/project-cccroom/static/media/paul_sleepingBeauty.3f59e038.mp3"
   },
   "entrypoints": [
-    "static/js/runtime-main.1d5eefc2.js",
-    "static/js/2.9463236d.chunk.js",
+    "static/js/runtime-main.b232eabf.js",
+    "static/js/2.7cf6210b.chunk.js",
     "static/css/main.e1eab72e.chunk.css",
     "static/js/main.2b453154.chunk.js"
   ]
