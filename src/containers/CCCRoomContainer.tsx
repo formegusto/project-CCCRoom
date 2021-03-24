@@ -2,9 +2,11 @@ import React, { useCallback, useRef, useState } from 'react';
 import CCCRoomComponent from '../components/CCCRoomComponent';
 import { LPDrop ,LPRotate } from '../animation/CCCRoomAnimation';
 import { Keyframes } from 'styled-components';
+import Palette from '../style/palette';
 
 function CCCRoomContainer() {
     const [lpAni, setLpAni] = useState<Keyframes | null>(null);
+    const [lpColor, setLpColor] = useState<string[] | null>(null);
     const refLP = useRef<HTMLDivElement>(null);
     const refAudio = useRef<HTMLAudioElement>(null);
     const refStick = useRef<HTMLDivElement>(null);
@@ -36,6 +38,9 @@ function CCCRoomContainer() {
     const openLpBook = useCallback((e: React.MouseEvent) => {
         const lpFront = e.target as HTMLDivElement;
 
+        console.log(lpFront.dataset);
+        const color: string = lpFront.dataset.color as string;
+        setLpColor(Palette[color]);
         lpFront.style.transform = "rotateX(-7.5deg)";
 
         const lpBook = lpFront.parentNode;
@@ -43,6 +48,7 @@ function CCCRoomContainer() {
         lpDummy.style.transform = "translateY(-200rem) translateZ(300px)";
         lpDummy.addEventListener('transitionend', function(this:HTMLDivElement) {
             setLpAni(LPDrop);
+            
             if(refLP.current) {
                 refLP.current.addEventListener('animationend', moveStickBody);
             }
@@ -82,6 +88,7 @@ function CCCRoomContainer() {
     
     return <CCCRoomComponent
         lpAni={lpAni}
+        lpColor={lpColor}
         refLP={refLP}
         refAudio={refAudio}
         refStick={refStick}

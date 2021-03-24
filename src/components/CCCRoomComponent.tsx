@@ -2,9 +2,11 @@ import React from 'react';
 import styled, { css, Keyframes } from 'styled-components';
 import { LPDrop } from '../animation/CCCRoomAnimation';
 import sleepingbeauty from '../assets/music/paul_sleepingBeauty.mp3';
+import Palette from '../style/palette';
 
 type Props = {
     lpAni?: Keyframes | null;
+    lpColor: string[] | null;
     refLP: React.Ref<HTMLDivElement>;
     refAudio: React.Ref<HTMLAudioElement>;
     refStick: React.Ref<HTMLDivElement>;
@@ -27,7 +29,7 @@ function CCCRoomComponent(props: Props) {
                         <LPDummy>
                             <LPCenter/>
                         </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
+                        <LPBookFront onClick={props.openLpBook} data-color="ivory">
                             <h1>
                                 Play?
                             </h1>
@@ -38,7 +40,7 @@ function CCCRoomComponent(props: Props) {
                         <LPDummy>
                             <LPCenter/>
                         </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
+                        <LPBookFront onClick={props.openLpBook} data-color="ivory">
                             <h1>
                                 Play?
                             </h1>
@@ -49,42 +51,7 @@ function CCCRoomComponent(props: Props) {
                         <LPDummy>
                             <LPCenter/>
                         </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
-                            <h1>
-                                Play?
-                            </h1>
-                        </LPBookFront>
-                    </LPBook>
-                </LPBookGroup>
-                <LPBookGroup>
-                    <LPBook>
-                        <LPBookBack />
-                        <LPDummy>
-                            <LPCenter/>
-                        </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
-                            <h1>
-                                Play?
-                            </h1>
-                        </LPBookFront>
-                    </LPBook>
-                    <LPBook>
-                        <LPBookBack />
-                        <LPDummy>
-                            <LPCenter/>
-                        </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
-                            <h1>
-                                Play?
-                            </h1>
-                        </LPBookFront>
-                    </LPBook>
-                    <LPBook>
-                        <LPBookBack />
-                        <LPDummy>
-                            <LPCenter/>
-                        </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
+                        <LPBookFront onClick={props.openLpBook} data-color="ivory">
                             <h1>
                                 Play?
                             </h1>
@@ -97,7 +64,7 @@ function CCCRoomComponent(props: Props) {
                         <LPDummy>
                             <LPCenter/>
                         </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
+                        <LPBookFront onClick={props.openLpBook} data-color="yellow">
                             <h1>
                                 Play?
                             </h1>
@@ -108,7 +75,7 @@ function CCCRoomComponent(props: Props) {
                         <LPDummy>
                             <LPCenter/>
                         </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
+                        <LPBookFront onClick={props.openLpBook} data-color="yellow">
                             <h1>
                                 Play?
                             </h1>
@@ -119,7 +86,42 @@ function CCCRoomComponent(props: Props) {
                         <LPDummy>
                             <LPCenter/>
                         </LPDummy>
-                        <LPBookFront onClick={props.openLpBook}>
+                        <LPBookFront onClick={props.openLpBook} data-color="yellow">
+                            <h1>
+                                Play?
+                            </h1>
+                        </LPBookFront>
+                    </LPBook>
+                </LPBookGroup>
+                <LPBookGroup>
+                    <LPBook>
+                        <LPBookBack />
+                        <LPDummy>
+                            <LPCenter/>
+                        </LPDummy>
+                        <LPBookFront onClick={props.openLpBook} data-color="green">
+                            <h1>
+                                Play?
+                            </h1>
+                        </LPBookFront>
+                    </LPBook>
+                    <LPBook>
+                        <LPBookBack />
+                        <LPDummy>
+                            <LPCenter/>
+                        </LPDummy>
+                        <LPBookFront onClick={props.openLpBook} data-color="green">
+                            <h1>
+                                Play?
+                            </h1>
+                        </LPBookFront>
+                    </LPBook>
+                    <LPBook>
+                        <LPBookBack />
+                        <LPDummy>
+                            <LPCenter/>
+                        </LPDummy>
+                        <LPBookFront onClick={props.openLpBook} data-color="green">
                             <h1>
                                 Play?
                             </h1>
@@ -135,15 +137,31 @@ function CCCRoomComponent(props: Props) {
                         animation: props.lpAni
                     }}
                     >
-                    <LPFront>
-                        <LPHole/>
+                    <LPFront
+                        style={{
+                            background: props.lpColor ? `linear-gradient(${props.lpColor[0]} 0%, ${props.lpColor[3]} 100%)` : "rgb(255,255,255)"
+                        }}
+                    >
+                        <LPCenter>
+                            <LPHole
+                                style={{
+                                    backgroundColor: props.lpColor ? props.lpColor[3] : "rgb(255,255,255)"
+                                }}
+                            />
+                        </LPCenter>
                     </LPFront>
-                    <LPBack>
+                    <LPBack
+                        style={{
+                            backgroundColor: props.lpColor ? props.lpColor[4] : "rgb(255,255,255)"
+                        }}
+                    >
                         <LPHole/>
                     </LPBack>
                 </LP>
                 <LPBoxBlock>
-                    <LPBoxFront>
+                    <LPBoxFront style={{
+                        backgroundColor: props.lpColor ? props.lpColor[2] : "rgb(255,255,255)"
+                    }}>
                         <LPStick ref={props.refStick}>
                             <LPStickController>
                                 <ControllerFront/>
@@ -345,6 +363,10 @@ const ControllerBack = styled.div`
 
 
 const LPCenter = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     width: 50%;
     height: 50%;
 
@@ -520,14 +542,38 @@ const LPBrary = styled.div`
 
     & > div:nth-child(1) {
         transform: translateZ(1px);
+
+        & > div > div:nth-child(2) {
+            background-color: ${Palette.ivory[2]};
+        }
+
+        & > div > div:not(:nth-child(2)) {
+            background-color: ${Palette.ivory[0]};
+        }
     }
 
     & > div:nth-child(2) {
         transform: translateZ(4px);
+
+        & > div > div:nth-child(2) {
+            background-color: ${Palette.yellow[2]};
+        }
+
+        & > div > div:not(:nth-child(2)) {
+            background-color: ${Palette.yellow[0]};
+        }
     }
 
     & > div:nth-child(3) {
         transform: translateZ(7px);
+
+        & > div > div:nth-child(2) {
+            background-color: ${Palette.green[2]};
+        }
+
+        & > div > div:not(:nth-child(2)) {
+            background-color: ${Palette.green[0]};
+        }
     }
 
     @media ${({theme}) => theme.device.laptop} {
@@ -872,6 +918,7 @@ const LP = styled.div<{styleProps: LPProps}>`
     height: 300px;
 
     margin: -150px 0 0 -150px;
+    border-radius: 100%;
     transform-style: preserve-3d;
 
     cursor: pointer;
@@ -881,6 +928,8 @@ const LP = styled.div<{styleProps: LPProps}>`
             css`animation: ${props.styleProps.animation} 1s forwards;` :
             css`animation: ${props.styleProps.animation} 1s linear infinite;`  
     }
+
+    transform: translateZ(150rem);
 `;
 
 const LPFront = styled.div`
@@ -897,8 +946,7 @@ const LPFront = styled.div`
 
     border: 2px solid rgb(0,0,0);
     border-radius: 100%;
-    background: linear-gradient(70deg, orange, yellow);
-    /* background-color: rgb(255,255,255); */
+    background-color: rgb(255,255,255);
 
     transform: translateZ(10px);
     transform-style: preserve-3d;
