@@ -13,7 +13,10 @@ type Props = {
     refAudio: React.Ref<HTMLAudioElement>;
     refStick: React.Ref<HTMLDivElement>;
     refStickBody: React.Ref<HTMLDivElement>;
+    refComment: React.Ref<HTMLHeadingElement>;
     setLpRotate: () => void;
+    onMusic: () => void;
+    offMusic: () => void;
     openLpBook: (e: React.MouseEvent) => void;
     hideButton: (e: React.MouseEvent) => void;
 }
@@ -170,7 +173,13 @@ function CCCRoomComponent(props: Props) {
                         </LPStick>
                     </LPBoxFront>
                     <LPBoxBack/>
-                    <LPBoxLeft/>
+                    <LPBoxLeft styleProps={{
+                        nowColor: props.lpColor
+                    }}>
+                        <h1 ref={props.refComment}>
+                            I'll fill the song for u.
+                        </h1>
+                    </LPBoxLeft>
                     <LPBoxRight/>
                     <LPEdgeLeft/>
                     <LPEdgeRight/>
@@ -181,8 +190,8 @@ function CCCRoomComponent(props: Props) {
                                 nowColor: props.lpColor
                             }}
                         >
-                            <AiOutlinePlayCircle size={48}/>
-                            <AiOutlinePauseCircle size={48}/>
+                            <AiOutlinePlayCircle size={48} onClick={props.onMusic}/>
+                            <AiOutlinePauseCircle size={48} onClick={props.offMusic}/>
                             <AiOutlineSmile size={48} onClick={props.hideButton}/>
                         </ButtonBlock>
                     </LPBoxHidden>
@@ -979,10 +988,14 @@ const LPEdgeRight = styled.div`
     transform-origin: 0 50%;
 `
 
-const LPBoxLeft = styled.div`
+const LPBoxLeft = styled.div<{styleProps?: StickProps}>`
     position: absolute;
     top: 100%;
     left: 0;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
 
     z-index: 1;
 
@@ -994,12 +1007,44 @@ const LPBoxLeft = styled.div`
     border-end-end-radius: 1rem;
     transform: rotateX(-90deg);
     transform-origin: 0 0;
+
+    & > h1 {
+        transform: translateY(1.25rem);
+        margin: 0 2rem 0 0;
+
+        font-size: 1rem;
+        color: ${props => props.styleProps?.nowColor && props.styleProps.nowColor[4]};
+
+        opacity: 0;
+        transition: 1.5s;
+        letter-spacing: .4rem;
+
+        @media ${({theme}) => theme.device.laptop} {
+            font-size: 1rem;   
+            transform: translateY(1.25rem);
+        }
+
+        @media ${({theme}) => theme.device.tablet} {
+            font-size: .75rem;
+            transform: translateY(1.15rem);
+        }
+
+        @media ${({theme}) => theme.device.mobile} {
+            font-size: .5rem;
+            transform: translateY(1rem);
+        }
+    }
 `;
 
 const LPBoxRight = styled.div`
     position: absolute;
     top: 0;
     left: 100%;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
 
     z-index: 1;
 
@@ -1143,6 +1188,7 @@ const LPBack = styled.div`
     border: 2px solid rgb(0,0,0);
     border-radius: 100%;
     background-color: rgb(255,255,255);
+    transform: translateZ(1px);
     transform-style: preserve-3d;
 
     @media ${({theme}) => theme.device.laptop} {

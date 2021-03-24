@@ -12,9 +12,37 @@ function CCCRoomContainer() {
     const refAudio = useRef<HTMLAudioElement>(null);
     const refStick = useRef<HTMLDivElement>(null);
     const refStickBody = useRef<HTMLDivElement>(null);
+    const refComment = useRef<HTMLHeadingElement>(null);
+
+    const closeLpFront = useCallback(function(this:HTMLDivElement, e: TransitionEvent) {
+        this.removeEventListener('transitionend', closeLpFront);
+        const lpFront = document.querySelector(".open") as HTMLDivElement;
+
+        if(lpFront) {
+            lpFront.style.transform = "";
+            lpFront.classList.remove('open');
+        }
+    }, []);
+
+    const downLpDummy = useCallback(function(this:HTMLDivElement, e: AnimationEvent) {
+        this.removeEventListener('animationend', downLpDummy);
+        const lpFront = document.querySelector(".open") as HTMLDivElement;
+
+        if(lpFront){
+            const lp = lpFront.parentNode;
+            const lpDummy = lp?.querySelector("div:nth-child(2)") as HTMLDivElement;
+
+            lpDummy.style.transform = "";
+            lpDummy.addEventListener('transitionend', closeLpFront)
+        }
+    }, [closeLpFront]);
 
     const upLp = useCallback(function(this:HTMLDivElement, e: TransitionEvent) {
         this.removeEventListener('transitionend', upLp);
+        if(refLP.current) {
+            refLP.current.style.animationPlayState = "";
+            refLP.current.addEventListener('animationend', downLpDummy)
+        }
         setLpAni(LPUp);
         setTimeout(function () {
             window.scrollTo({
@@ -22,7 +50,7 @@ function CCCRoomContainer() {
                 behavior: 'smooth'
             });
         }, 100);
-    }, []);
+    }, [downLpDummy]);
 
     const backStick = useCallback(function(this:HTMLDivElement, e: TransitionEvent) {
         this.removeEventListener('transitionend', backStick);
@@ -47,8 +75,19 @@ function CCCRoomContainer() {
         if(refButton.current) {
             refButton.current.style.transform = "";
             refButton.current.addEventListener('transitionend', backStickBody);
+            if(refAudio.current) {
+                if(!refAudio.current.paused) {
+                    refAudio.current.pause();
+                    refAudio.current.currentTime = 0;
+                    if(refLP.current) {
+                        if(lpAni === LPRotate){
+                            refLP.current.style.animationPlayState = "paused";
+                        }
+                    }
+                }
+            }
         }
-    }, [backStickBody]);
+    }, [backStickBody, lpAni]);
 
     const showButtonBlock = useCallback(function(this: HTMLDivElement, e: TransitionEvent) {
         this.removeEventListener('transitionend', showButtonBlock);
@@ -85,11 +124,24 @@ function CCCRoomContainer() {
         if(refStickBody.current) {
             refStickBody.current.style.transform = "translateZ(10px) rotateX(25deg)";
             refStickBody.current.addEventListener('transitionend', moveStick);
+            if(refComment.current){
+                refComment.current.style.opacity = "1";
+                refComment.current.style.letterSpacing = ".25rem";
+            }
         }
     }, [moveStick]);
 
+    const dropLpAni = useCallback(function(this:HTMLDivElement, e: TransitionEvent) {
+        this.removeEventListener('transitionend', dropLpAni);
+        setLpAni(LPDrop);
+        if(refLP.current) {
+            refLP.current.addEventListener('animationend', moveStickBody);
+        }
+    }, [moveStickBody])
+
     const openLpBook = useCallback((e: React.MouseEvent) => {
         const lpFront = e.target as HTMLDivElement;
+        lpFront.classList.add("open");
 
         console.log(lpFront.dataset);
         const color: string = lpFront.dataset.color as string;
@@ -106,13 +158,7 @@ function CCCRoomContainer() {
         document.body.style.background = "linear-gradient(45deg," + Palette[color][0] + "," + Palette[color][8] +")";
         // document.body.style.height = "200vh";
 
-        lpDummy.addEventListener('transitionend', function(this:HTMLDivElement) {
-            setLpAni(LPDrop);
-            
-            if(refLP.current) {
-                refLP.current.addEventListener('animationend', moveStickBody);
-            }
-        })
+        lpDummy.addEventListener('transitionend', dropLpAni);
         setTimeout(function () {
             if(window.innerHeight < 820) {
                 window.scrollTo({
@@ -129,7 +175,32 @@ function CCCRoomContainer() {
             }
             
         }, 100);
-    }, [moveStickBody]);
+    }, [dropLpAni]);
+
+    const offMusic = useCallback(() => {
+        if(refAudio.current) {
+            if(!refAudio.current.paused) {
+                if(refLP.current) {
+                    refLP.current.style.animationPlayState = "paused";
+                    refAudio.current.pause();
+                }
+            }
+        }
+    }, []);
+
+    const onMusic = useCallback(() => {
+        if(refAudio.current){
+            if(lpAni !== LPRotate){
+                refAudio.current.play();
+                setLpAni(LPRotate);
+            } else {
+                if(refLP.current){
+                    refAudio.current.play();
+                    refLP.current.style.animationPlayState = "";
+                }
+            }
+        }
+    }, [lpAni]);
 
     const setLpRotate = useCallback(() => {
         if(refAudio.current){
@@ -146,7 +217,7 @@ function CCCRoomContainer() {
                 }
             } else {
                 if(refAudio.current) {
-                refAudio.current.pause();
+                    refAudio.current.pause();
                 } 
                 if(refLP.current) {
                     refLP.current.style.animationPlayState = "paused";
@@ -164,7 +235,10 @@ function CCCRoomContainer() {
         refAudio={refAudio}
         refStick={refStick}
         refStickBody={refStickBody}
+        refComment={refComment}
         setLpRotate={setLpRotate}
+        onMusic={onMusic}
+        offMusic={offMusic}
         openLpBook={openLpBook}
         hideButton={hideButtonBlock}
     />
