@@ -52,6 +52,7 @@ function CCCRoomContainer() {
 
         const lpBook = lpFront.parentNode;
         const lpDummy = lpBook?.querySelector("div:nth-child(2)") as HTMLDivElement;
+
         lpDummy.style.transform = "translateY(-200rem) translateZ(300px)";
 
         console.log(Palette[color].join(" 0%,"));
@@ -64,10 +65,20 @@ function CCCRoomContainer() {
             }
         })
         setTimeout(function () {
-            window.scrollTo({
-                top: window.innerHeight,
-                behavior: 'smooth'
-            })
+            if(window.innerHeight < 820) {
+                window.scrollTo({
+                    // top: document.body.scrollHeight,
+                    top: 980,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    // top: 980,
+                    behavior: 'smooth'
+                });
+            }
+            
         }, 100);
     }, [moveStickBody]);
 
