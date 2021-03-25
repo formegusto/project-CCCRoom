@@ -3,7 +3,7 @@ import styled, { css, Keyframes } from 'styled-components';
 import { LPDrop, LPUp, LPBrarySpin, TitleBoxAni } from '../animation/CCCRoomAnimation';
 import sleepingbeauty from '../assets/music/paul_sleepingBeauty.mp3';
 import Palette from '../style/palette';
-import { AiOutlineSmile, AiOutlinePlayCircle, AiOutlinePauseCircle } from 'react-icons/ai';
+import { AiOutlineSmile, AiOutlinePlayCircle, AiOutlinePauseCircle, AiOutlineInstagram, AiOutlineGithub } from 'react-icons/ai';
 
 type Props = {
     lpAni?: Keyframes | null;
@@ -32,8 +32,19 @@ function CCCRoomComponent(props: Props) {
                 <TitleBox>
                     <em className="big">C</em>
                     <em className="middle">C</em>
-                    <em className="small">C</em>.Room
+                    <em className="small">C</em>.R
+                    <a href="https://www.instagram.com/hi_thniii/" target="__blank">
+                        <AiOutlineInstagram/>
+                    </a>
+                    <a href="https://github.com/formegusto" target="__blank">
+                        <AiOutlineGithub/>
+                    </a>
+                    M
+                    <CopyrightBox>
+                        Copyright &copy; iamformegusto
+                    </CopyrightBox>
                 </TitleBox>
+                
                 <LPBookGroup>
                     {[0,5,8].map((num, idx) => 
                         <LPBook key={idx}>
@@ -209,6 +220,14 @@ function CCCRoomComponent(props: Props) {
 type StickProps = {
     nowColor?: string[] | null;
 }
+
+const CopyrightBox = styled.h1`
+    font-size: .25em;
+    color: #333;
+    letter-spacing: .25em;
+
+    text-align: center;
+`;
 
 const ButtonBlock = styled.div<{styleProps?: StickProps}>`
     display: flex;
@@ -576,6 +595,17 @@ const TitleBox = styled.h1`
 
     font-size: 3rem;
     color: #FFF;
+    vertical-align: sub;
+
+    & > a {
+        text-decoration: none;
+        color: white;
+        font-size: 1em;
+    }
+    
+    & > svg {
+        display: inline;
+    }
 
     /* ${css`animation: ${TitleBoxAni} 1s forwards;`} */
 
@@ -598,24 +628,24 @@ const TitleBox = styled.h1`
         font-weight: 400;
     }
     
-    transform: translateY(-1.75em) translateX(-1em);
+    transform: translateY(-2.25em) translateX(-1em);
     letter-spacing: .15em;
 
     @media ${({theme}) => theme.device.laptop} {
         font-size: 3rem;
-        transform: translateY(-1.75em) translateX(-1em);
+        transform: translateY(-2em) translateX(-1em);
         letter-spacing: .15em;
     }
 
     @media ${({theme}) => theme.device.tablet} {
         font-size: 2.5rem;
-        transform: translateY(-1.5em) translateX(-.75em);
+        transform: translateY(-2em) translateX(-1em);
         letter-spacing: .15em;
     }
 
     @media ${({theme}) => theme.device.mobile} {
         font-size: 2rem;
-        transform: translateY(-1.5em) translateX(-.5em);
+        transform: translateY(-2em) translateX(-0.75em);
         letter-spacing: .15em;
     }
 `;

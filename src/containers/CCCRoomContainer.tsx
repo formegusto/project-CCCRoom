@@ -165,7 +165,7 @@ function CCCRoomContainer() {
 
         lpDummy.addEventListener('transitionend', dropLpAni);
         setTimeout(function () {
-            if(window.innerHeight < 820) {
+            if(window.innerHeight < 800) {
                 window.scrollTo({
                     // top: document.body.scrollHeight,
                     top: 980,
