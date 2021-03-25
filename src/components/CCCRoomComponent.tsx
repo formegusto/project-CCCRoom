@@ -612,12 +612,14 @@ const TitleBox = styled.h1`
 
     & > em.big {
         font-size: 1.5em;
+        letter-spacing: 0em;
         color: ${Palette['yellow'][3]};
         font-weight: 600;
     }
 
     & > em.middle {
         font-size: 1.25em;
+        letter-spacing: 0em;
         color: ${Palette['ivory'][3]};
         font-weight: 500;
     }
@@ -670,7 +672,7 @@ const LPBrary = styled.div`
         margin: 0 0 1rem 0;
     }
 
-    & > div:nth-child(1) {
+    & > div:nth-child(2) {
         transform: translateZ(1px);
 
         & > div > div:nth-child(2) {
@@ -682,7 +684,7 @@ const LPBrary = styled.div`
         }
     }
 
-    & > div:nth-child(2) {
+    & > div:nth-child(3) {
         transform: translateZ(4px);
 
         & > div > div:nth-child(2) {
@@ -694,7 +696,7 @@ const LPBrary = styled.div`
         }
     }
 
-    & > div:nth-child(3) {
+    & > div:nth-child(4) {
         transform: translateZ(7px);
 
         & > div > div:nth-child(2) {

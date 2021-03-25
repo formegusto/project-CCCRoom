@@ -35,6 +35,8 @@ function CCCRoomContainer() {
             lpDummy.style.transform = "";
             lpDummy.addEventListener('transitionend', closeLpFront)
         }
+
+        document.body.style.background = "";
     }, [closeLpFront]);
 
     const upLp = useCallback(function(this:HTMLDivElement, e: TransitionEvent) {
@@ -87,7 +89,6 @@ function CCCRoomContainer() {
                 }
             }
         }
-        document.body.style.background = "";
     }, [backStickBody, lpAni]);
 
     const showButtonBlock = useCallback(function(this: HTMLDivElement, e: TransitionEvent) {
@@ -141,8 +142,9 @@ function CCCRoomContainer() {
     }, [moveStickBody])
 
     const openLpBook = useCallback((e: React.MouseEvent) => {
-        console.log(e.currentTarget.tagName);
-
+        if(document.querySelector(".open")){
+            return;
+        }
         const lpFront = e.currentTarget as HTMLDivElement;
 
         lpFront.classList.add("open");

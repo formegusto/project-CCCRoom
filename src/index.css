@@ -130,3 +130,7 @@ table {
 html * {
   font-family: "Montserrat", sans-serif;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
